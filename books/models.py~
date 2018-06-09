@@ -1,0 +1,145 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+# MATERIE E AMBITI SONO FISSE
+
+#~ AMBITI = (
+    #~ ('A','Filosofia'),
+    #~ ('B','Teologia'),
+    #~ ('C','Sacra scrittura'),
+    #~ ('D','Documenti magisteriali'),
+    #~ ('E','Liturgia'),
+    #~ ('F','Storia'),
+    #~ ('G','Padri della Chiesa'),
+    #~ ('H','Spiritualita'),
+    #~ ('I','Cultura generale'),
+    #~ ('L','Testi scolastici'),
+#~ )
+
+MATERIE = (
+    ('A1','Filosofia'),
+    ('A2','Scienze umane'),
+    ('B1','Teologia dogmatica'),
+    ('B2','Teologia morale'),
+    ('B3','Ecumenismo e altre confessioni Cristiane'),
+    ('C1','Nuovo Testamento'),
+    ('C2','Antico Testamento'),
+    ('C3','Commenti Spirituali'),
+    ('C4','Ebraismo'),
+    ('D1','Santa Sede'),
+    ('D2','Conferenze Episcopali e Diocesi'),
+    ('D3','Altri Soggetti Ecclesiali'),
+    ('D4','Diritto canonico'),
+    ('E1','Liturgia'),
+    ('F1','Storia generale'),
+    ('F2','Storia della Chiesa'),
+    ('G1','Patrologia'),
+    ('G2','Patristica'),
+    ('H1','Teologia Spirituale'),
+    ('H2','Agiografia'),
+    ('I1','Cultura generale'),
+    ('I2','Enciclopedie e dizionari'),
+    ('I3','Narrativa'),
+    ('L1','Manuali'),
+    ('L2','Appunti e dispense'),
+)
+
+#~ AMBITI = (
+    #~ ('Filosofia','A'),
+    #~ ('Teologia','B'),
+    #~ ('Sacra scrittura','C'),
+    #~ ('Documenti magisteriali','D'),
+    #~ ('Liturgia','E'),
+    #~ ('Storia','F'),
+    #~ ('Padri della Chiesa','G'),
+    #~ ('Spiritualita','H'),
+    #~ ('Cultura generale','I'),
+    #~ ('Testi scolastici','L'),
+#~ )
+
+#~ MATERIE = (
+    #~ ('Filosofia','A1'),
+    #~ ('Scienze umane','A2'),
+    #~ ('Teologia dogmatica','B1'),
+    #~ ('Teologia morale','B2'),
+    #~ ('Ecumenismo e altre confessioni Cristiane','B3'),
+    #~ ('Nuovo Testamento','C1'),
+    #~ ('Antico Testamento','C2'),
+    #~ ('Commenti Spirituali','C3'),
+    #~ ('Ebraismo','C4'),
+    #~ ('Magistero','D1'),
+    #~ ('Pontefici recenti','D2'),
+    #~ ('Conferenze episcopali - Diocesi','D3'),
+    #~ ('Diritto canonico','D4'),
+    #~ ('Liturgia','E1'),
+    #~ ('Storia generale','F1'),
+    #~ ('Storia della Chiesa','F2'),
+    #~ ('Patrologia','G1'),
+    #~ ('Patristica','G2'),
+    #~ ('Teologia Spirituale','H1'),
+    #~ ('Agiografia','H2'),
+    #~ ('Cultura generale','I1'),
+    #~ ('Enciclopedie e dizionari','I2'),
+    #~ ('Narrativa','I3'),
+    #~ ('Manuali','L1'),
+    #~ ('Appunti e dispense','L2'),
+#~ )
+
+
+
+STATO_DEL_PRESTITO =(
+    ('D','Disponibile'),
+    ('P','Prestato'),
+)
+
+class Autore(models.Model):
+    nome = models.CharField(max_length=100)
+    cognome = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.nome + ' ' +self.cognome
+
+    class Meta:
+        verbose_name_plural = "Autori"
+        
+    def nome_completo(self):
+        return self.nome + ' ' +self.cognome
+        
+class Editore(models.Model):
+    nome = models.CharField(max_length=100)
+    def __unicode__(self):
+        return self.nome 
+    class Meta:
+        verbose_name_plural = "Editori"
+
+class Libro(models.Model):
+    titolo = models.CharField(max_length=200, unique=False)
+    autore = models.ManyToManyField(Autore)
+    editore = models.ForeignKey(Editore)
+    #ambito = models.CharField(max_length=1, choices=AMBITI)
+    materia = models.CharField(max_length=2, choices=MATERIE)
+    colonna = models.IntegerField()
+    palco = models.CharField(max_length=4)
+    numero_libro = models.IntegerField()
+    anno_edizione = models.IntegerField(blank=True,null=True)
+    anno_ristampa = models.IntegerField(blank=True,null=True)
+    #numero_doppione = models.CharField(max_length=15, blank=True)
+    #inserimento_successivo = models.CharField(max_length=15 , blank=True)
+    argomento_principale = models.CharField(max_length=200 , blank=True)
+    argomento_secondario = models.CharField(max_length=200, blank=True)
+    note = models.CharField(max_length=200, blank=True)
+    stato_prestito = models.CharField(max_length=100, choices=STATO_DEL_PRESTITO,default='D')
+    titolare_del_prestito = models.CharField(max_length=150, blank=True)
+    prestato_date = models.DateTimeField(blank=True, null=True) 
+    def __unicode__(self):
+        return self.titolo  
+    class Meta:
+        verbose_name_plural = "Libri"
+
+
+class Sito_consultabile(models.Model):
+    url = models.URLField(verify_exists=True, max_length=200)
+    descrizione = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.url     
+    class Meta:
+        verbose_name_plural = "Siti consultabili"

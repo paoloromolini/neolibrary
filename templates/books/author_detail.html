@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ object }}</h1>
+    <ul class="list-group">
+        {% for book in object.book_set.all %}
+        <li class="list-group-item">
+            <a href="{{ book.get_absolute_url }}">{{ book }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
