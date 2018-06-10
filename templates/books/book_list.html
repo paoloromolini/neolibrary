@@ -1,11 +1,100 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
+<button data-toggle="collapse" class="btn" data-target="#searchform">
+    {% include 'svg/magnifier.html' %}
+</button>
+<button class="btn" onclick="javascript:document.getElementById('searchform').reset();">{% trans 'Clean form' %}</button>
+<hr>
+<form id="searchform" action="" method="get" accept-charset="utf-8" class="collapse show" >
+    <div class="form-group">
+        <label for="title">{% trans 'Title' %}</label>
+        <input class="form-control" name="title" type="text" value="{{ request.GET.title }}" />
+    </div>
+    <div class="form-group">
+        <label for="author">{% trans 'Author' %}</label>
+        <input class="form-control" name="author" type="text" value="{{ request.GET.author }}" />
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4">
+            <label for="author">{% trans 'Genre' %}</label>
+            <select class="form-control" name="genre">
+                <option value=""></option>
+                {% for genre in genres %}
+                    <option value="{{ genre.code }}" {% if request.GET.genre == genre.code %}selected{% endif %}>{{ genre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="column">{% trans 'Column' %}</label>
+            <input class="form-control" type="number" name="column" value="{{ request.GET.column }}" />
+        </div>
+        <!--
+        <div class="col-md-4">
+            <label for="palco">{% trans 'Palco' %}</label>
+            <input class="form-control" type="number" name="palco" value="{{ request.GET.palco }}" />
+        </div>
+        -->
+        <div class="col-md-4">
+            <label for="number">{% trans 'Number' %}</label>
+            <input class="form-control" type="number" name="number" value="{{ request.GET.number }}" />
+        </div>
+    </div>
+    <hr>
+    <p>
+        <button type="submit" class="btn btn-primary">{% trans 'Search' %}</button>
+    </p>
+</form>
+
 <ul class="list-group">
-{% for obj in object_list %}
-    <li class="list-group-item">
-        <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
-    </li>
-{% endfor %}
+    {% for obj in object_list %}
+        <li class="list-group-item">
+            <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - 
+            {% for author in obj.author.all %}<a href="{{ author.get_absolute_url }}" class="text-info">{{ author }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+        </li>
+    {% endfor %}
 </ul>
+
+{% if is_paginated %}
+    <hr>
+    <nav>
+        <ul class="pagination justify-content-center pagination-sm">
+            {% if page_obj.has_previous %}
+                {% if not search %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'book-list' %}?page={{ page_obj.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ page_obj.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">{% trans 'Previous' %}</a>
+                </li>
+            {% endif %} 
+            {% for object in page_obj.paginator.page_range %}
+                <li class="page-item"><a class="page-link" href="{% url 'book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+            {% endfor %} 
+            {% if page_obj.has_next %}
+                {% if not search %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'book-list' %}?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">{% trans 'Next' %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
 {% endblock content %}

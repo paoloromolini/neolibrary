@@ -40,11 +40,13 @@ class Publisher(models.Model):
 @python_2_unicode_compatible
 class Genre(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=100)
+    code = models.CharField(verbose_name=_('code'), max_length=10)
 
     def __str__(self):
-        return self.name 
+        return '{} {}'.format(self.code ,self.name)
 
     class Meta:
+        ordering = ('code',)
         verbose_name = _('Genre')
         verbose_name_plural = _('Genres')
 

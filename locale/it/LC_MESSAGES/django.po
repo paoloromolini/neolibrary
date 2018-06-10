@@ -1,0 +1,220 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Paolo Romolini, 2018
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-10 16:44+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\books\forms.py:6 .\books\models.py:62
+msgid "title"
+msgstr ""
+
+#: .\books\models.py:14 .\books\models.py:30 .\books\models.py:42
+msgid "name"
+msgstr "nome"
+
+#: .\books\models.py:15
+msgid "last name"
+msgstr "Cognome"
+
+#: .\books\models.py:21 .\templates\books\book_list.html:13
+msgid "Author"
+msgstr "Autore"
+
+#: .\books\models.py:22
+msgid "Authors"
+msgstr "Autori"
+
+#: .\books\models.py:36
+msgid "Publisher"
+msgstr "Editore"
+
+#: .\books\models.py:37
+msgid "Publishers"
+msgstr "Editori"
+
+#: .\books\models.py:43
+msgid "code"
+msgstr "codice"
+
+#: .\books\models.py:50 .\templates\books\book_list.html:19
+msgid "Genre"
+msgstr "Materia"
+
+#: .\books\models.py:51
+msgid "Genres"
+msgstr "Materie"
+
+#: .\books\models.py:59
+msgid "Available"
+msgstr "Disponibile"
+
+#: .\books\models.py:60
+msgid "Lent"
+msgstr "In prestito"
+
+#: .\books\models.py:65
+msgid "publisher"
+msgstr "editore"
+
+#: .\books\models.py:70
+msgid "genre"
+msgstr "materia"
+
+#: .\books\models.py:75
+msgid "column"
+msgstr "colonna"
+
+#: .\books\models.py:76
+msgid "palco"
+msgstr "palco"
+
+#: .\books\models.py:77
+msgid "number"
+msgstr "numero"
+
+#: .\books\models.py:78
+msgid "year edition"
+msgstr "anno edizione"
+
+#: .\books\models.py:79
+msgid "reprint year"
+msgstr "anno ristampa"
+
+#: .\books\models.py:80
+msgid "main topic"
+msgstr "argomento principale"
+
+#: .\books\models.py:81
+msgid "secondary topic"
+msgstr "argomento secondario"
+
+#: .\books\models.py:82
+msgid "notes"
+msgstr "note"
+
+#: .\books\models.py:98
+msgid "loan holder"
+msgstr "titolare del prestito"
+
+#: .\books\models.py:99
+msgid "loan date"
+msgstr "data del prestito"
+
+#: .\books\models.py:100
+msgid "book"
+msgstr "libro"
+
+#: .\books\models.py:103
+msgid "Loan"
+msgstr "Prestito"
+
+#: .\books\models.py:104
+msgid "Loans"
+msgstr "Prestiti"
+
+#: .\templates\base.html:18
+msgid "Admin"
+msgstr "Admministrazione"
+
+#: .\templates\base.html:27
+msgid "Home"
+msgstr ""
+
+#: .\templates\books\book_detail.html:9
+msgid "Title:"
+msgstr "Titolo:"
+
+#: .\templates\books\book_detail.html:11
+#, fuzzy
+#| msgid "Genre"
+msgid "Genre:"
+msgstr "Materia"
+
+#: .\templates\books\book_detail.html:13
+msgid "Authors:"
+msgstr "Autori:"
+
+#: .\templates\books\book_detail.html:17
+msgid "Position:"
+msgstr "Posizione:"
+
+#: .\templates\books\book_detail.html:20
+msgid "Column:"
+msgstr "Colonna:"
+
+#: .\templates\books\book_detail.html:22
+msgid "Palco:"
+msgstr "Palco:"
+
+#: .\templates\books\book_detail.html:24
+msgid "Number:"
+msgstr "Numero:"
+
+#: .\templates\books\book_detail.html:29
+msgid "Year edition:"
+msgstr "Anno edizione:"
+
+#: .\templates\books\book_detail.html:33
+msgid "Reprint year:"
+msgstr "Anno ristampa:"
+
+#: .\templates\books\book_list.html:5
+msgid "Hide the search form"
+msgstr ""
+
+#: .\templates\books\book_list.html:6
+msgid "Clean form"
+msgstr "Azzera il form"
+
+#: .\templates\books\book_list.html:9
+msgid "Title"
+msgstr "Titolo"
+
+#: .\templates\books\book_list.html:28
+#| msgid "Column:"
+msgid "Column"
+msgstr "Colonna:"
+
+#: .\templates\books\book_list.html:33
+#| msgid "Palco:"
+msgid "Palco"
+msgstr "Palco:"
+
+#: .\templates\books\book_list.html:38
+#| msgid "Number:"
+msgid "Number"
+msgstr "Numero:"
+
+#: .\templates\books\book_list.html:44
+msgid "Search"
+msgstr "Cerca"
+
+#: .\templates\books\book_list.html:64 .\templates\books\book_list.html:68
+#: .\templates\books\book_list.html:73
+msgid "Previous"
+msgstr "Precendente"
+
+#: .\templates\books\book_list.html:82 .\templates\books\book_list.html:86
+#: .\templates\books\book_list.html:91
+msgid "Next"
+msgstr "Prossimo"
+
+#~ msgid "You are here: "
+#~ msgstr "Sei qui:"
+
+#~ msgid "Position"
+#~ msgstr "Posizione"

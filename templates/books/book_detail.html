@@ -3,10 +3,13 @@
 
 {% block content %}
 
-
+{% include 'history_back_btn.html' %}
+<hr>
 <dl class="row">
     <dt class="col-sm-3">{% trans 'Title:' %}</dt>
     <dd class="col-sm-9">{{ object.title }}</dd>
+    <dt class="col-sm-3">{% trans 'Genre:' %}</dt>
+    <dd class="col-sm-9">{{ object.genre }}</dd>
     <dt class="col-sm-3">{% trans 'Authors:' %}</dt>
     <dd class="col-sm-9">
         {% for a in object.author.all %}<a href="{{ a.get_absolute_url }}">{{ a }}</a>{% endfor %}
@@ -16,8 +19,8 @@
         <dl class="row">
             <dt class="col-sm-4">{% trans 'Column:' %}</dt>
             <dd class="col-sm-8">{{ object.column }}</dd>
-            <dt class="col-sm-4">{% trans 'Palco:' %}</dt>
-            <dd class="col-sm-8">{{ object.palco }}</dd>
+            <!--<dt class="col-sm-4">{% trans 'Palco:' %}</dt>
+            <dd class="col-sm-8">{{ object.palco }}</dd>-->
             <dt class="col-sm-4">{% trans 'Number:' %}</dt>
             <dd class="col-sm-8">{{ object.number }}</dd>
         </dl>

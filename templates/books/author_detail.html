@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
-
+{% load %}
 {% block content %}
     <h1>{{ object }}</h1>
+    {% include 'history_back_btn.html' %}
+    <hr>
     <ul class="list-group">
         {% for book in object.book_set.all %}
         <li class="list-group-item">
-            <a href="{{ book.get_absolute_url }}">{{ book }}</a>
+            <a href="{{ book.get_absolute_url }}">{{ book }}</a> -
+            {% for author in book.author.all %}<a href="{{ author.get_absolute_url }}" class="text-info">{{ author }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
         </li>
         {% endfor %}
     </ul>
