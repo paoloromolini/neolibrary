@@ -16,7 +16,7 @@ class BookAdmin(admin.ModelAdmin):
             'fields': ('title', 'author','publisher','genre',)
         }),
         ('Classificazione', {
-            'fields': ('column','number',)
+            'fields': ('column','number', 'palco')
         }),
         ('Loan', {
             'fields': ('loan_status',)
@@ -24,7 +24,7 @@ class BookAdmin(admin.ModelAdmin):
     )
 
     
-    list_display = ('title','column','number','genre','loan_status')
+    list_display = ('title','column','number','palco', 'genre','loan_status')
     search_fields = ['title']     
     list_filter = ('genre','loan_status',)
     filter_horizontal = ('author',)

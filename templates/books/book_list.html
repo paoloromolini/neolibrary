@@ -15,27 +15,25 @@
         <label for="author">{% trans 'Author' %}</label>
         <input class="form-control" name="author" type="text" value="{{ request.GET.author }}" />
     </div>
-
+    <div class="form-group">
+        <label for="author">{% trans 'Genre' %}</label>
+        <select class="form-control" name="genre">
+            <option value=""></option>
+            {% for genre in genres %}
+                <option value="{{ genre.code }}" {% if request.GET.genre == genre.code %}selected{% endif %}>{{ genre }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <div class="form-row">
-        <div class="col-md-4">
-            <label for="author">{% trans 'Genre' %}</label>
-            <select class="form-control" name="genre">
-                <option value=""></option>
-                {% for genre in genres %}
-                    <option value="{{ genre.code }}" {% if request.GET.genre == genre.code %}selected{% endif %}>{{ genre }}</option>
-                {% endfor %}
-            </select>
-        </div>
+
         <div class="col-md-4">
             <label for="column">{% trans 'Column' %}</label>
             <input class="form-control" type="number" name="column" value="{{ request.GET.column }}" />
         </div>
-        <!--
         <div class="col-md-4">
             <label for="palco">{% trans 'Palco' %}</label>
-            <input class="form-control" type="number" name="palco" value="{{ request.GET.palco }}" />
+            <input class="form-control" type="text" name="palco" value="{{ request.GET.palco }}" />
         </div>
-        -->
         <div class="col-md-4">
             <label for="number">{% trans 'Number' %}</label>
             <input class="form-control" type="number" name="number" value="{{ request.GET.number }}" />
