@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Paolo Romolini, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-20 21:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:6 models.py:62
+msgid "title"
+msgstr "tìtulo"
+
+#: models.py:14 models.py:30 models.py:42
+msgid "name"
+msgstr "nome"
+
+#: models.py:15
+msgid "last name"
+msgstr "sobrenome"
+
+#: models.py:21
+msgid "Author"
+msgstr "Autor"
+
+#: models.py:22
+msgid "Authors"
+msgstr "Autores"
+
+#: models.py:36
+msgid "Publisher"
+msgstr "Editor"
+
+#: models.py:37
+msgid "Publishers"
+msgstr "Editores"
+
+#: models.py:43
+msgid "code"
+msgstr "codigo"
+
+#: models.py:50
+msgid "Genre"
+msgstr "Gênero"
+
+#: models.py:51
+msgid "Genres"
+msgstr "Gêneros"
+
+#: models.py:59
+msgid "Available"
+msgstr "Acessível"
+
+#: models.py:60
+msgid "Lent"
+msgstr "Emprestado"
+
+#: models.py:65
+msgid "publisher"
+msgstr "editor"
+
+#: models.py:70
+msgid "genre"
+msgstr "Gênero"
+
+#: models.py:75
+msgid "column"
+msgstr "coluna"
+
+#: models.py:76
+msgid "palco"
+msgstr ""
+
+#: models.py:77
+msgid "number"
+msgstr "número"
+
+#: models.py:78
+msgid "year edition"
+msgstr "edição do ano"
+
+#: models.py:79
+msgid "reprint year"
+msgstr "ano de reimpressão"
+
+#: models.py:80
+msgid "main topic"
+msgstr "tópico principal"
+
+#: models.py:81
+msgid "secondary topic"
+msgstr "tópico secundário"
+
+#: models.py:82
+msgid "notes"
+msgstr "notas"
+
+#: models.py:92
+msgid "Book"
+msgstr "Livro"
+
+#: models.py:93
+msgid "Books"
+msgstr "Livros"
+
+#: models.py:98
+msgid "loan holder"
+msgstr "emprestador"
+
+#: models.py:99
+msgid "loan date"
+msgstr "data do empréstimo"
+
+#: models.py:100
+msgid "book"
+msgstr "livro"
+
+#: models.py:103
+msgid "Loan"
+msgstr "Empréstimo"
+
+#: models.py:104
+msgid "Loans"
+msgstr "Empréstimos"

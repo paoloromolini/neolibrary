@@ -89,8 +89,8 @@ class Book(models.Model):
         return reverse('book-detail', kwargs={'pk': self.pk})
 
     class Meta:
-        verbose_name = "Book"
-        verbose_name_plural = "Books"
+        verbose_name = _('Book')
+        verbose_name_plural = _('Books')
 
 
 @python_2_unicode_compatible
