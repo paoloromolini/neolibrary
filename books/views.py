@@ -1,6 +1,7 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import  DetailView
-from .models import Author, Book, Genre
+from django.views.generic.edit import CreateView
+from .models import Author, Book, Genre, Loan
 from .forms import SearchBooksForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.db.models import Q
@@ -48,12 +49,8 @@ class BookListView(CurrentSiteMixin, ListView):
                 search_fields = ['title']
                 f = search_filter(search_fields, title_q)
                 result = result.filter(f)    
-            authors = None
             if author_q:
-                search_fields = ['name', 'last_name']
-                f = search_filter(search_fields, author_q)
-                authors = Author.objects.filter(f)     
-            if authors:
+                authors = Author.objects.search(author_q)
                 result = result.filter(author__in=authors.values_list('pk', flat=True))
             if column_q:
                 result = result.filter(column__iexact=column_q.strip())
@@ -74,3 +71,34 @@ class AuthorDetailView(CurrentSiteMixin, DetailView):
 
     model = Author
 
+
+class AuthorsAutocomplete(ListView):
+
+    model = Author
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        authors = Author.objects.none()
+        if query and len(query) > 1:
+            authors = Author.objects.search(query)
+        return authors
+
+
+class LoanCreateView(CurrentSiteMixin, CreateView):
+
+    model  = Loan
+    fields = ['loan_holder']
+    success_url = '../'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(self.kwargs)
+        context['book'] = 1
+        return context
+
+    def form_valid(self, form):
+        book = Book.objects.get(pk=self.kwargs['book_id'])
+        form.instance.book = book
+        book.loan_status = Book.LENT
+        book.save()
+        return super().form_valid(form)

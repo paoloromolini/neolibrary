@@ -4,9 +4,10 @@
 <button data-toggle="collapse" class="btn" data-target="#searchform">
     {% include 'svg/magnifier.html' %}
 </button>
-<button class="btn" onclick="javascript:document.getElementById('searchform').reset();">{% trans 'Clean form' %}</button>
+<button class="btn" onclick="resetForm()">{% trans 'Clean form' %}</button>
 <hr>
-<form id="searchform" action="" method="get" accept-charset="utf-8" class="collapse show" >
+<form id="searchform" action="" method="get" accept-charset="utf-8"
+      class="collapse {% if object_list %}hide {%  else %}show{% endif %}" autocomplete="off">
     <div class="form-group">
         <label for="title">{% trans 'Title' %}</label>
         <input class="form-control" name="title" type="text" value="{{ request.GET.title }}" />
@@ -45,7 +46,7 @@
     </p>
 </form>
 
-<ul class="list-group">
+<ul id="results" class="list-group">
     {% for obj in object_list %}
         <li class="list-group-item">
             <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - 

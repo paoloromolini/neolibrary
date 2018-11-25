@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from django.utils.translation import gettext_lazy as _
 
-from .models import Author, Book, Genre, Publisher
+from .models import Author, Book, Genre, Publisher, Loan
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -39,3 +39,4 @@ admin.site.register(Book, BookAdmin)
 admin.site.register(Publisher, PublisherAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre, GenreAdmin)
+admin.site.register(Loan)

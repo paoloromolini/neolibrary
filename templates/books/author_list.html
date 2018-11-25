@@ -1,0 +1,5 @@
+<ul class="author-auto-complete list-group">
+{% for author in object_list %}
+    <li class="list-group-item" onclick="changeInputWithValue('{{ author|escapejs }}');">{{ author }}</li>
+{% endfor %}
+</ul>

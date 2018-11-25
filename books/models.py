@@ -2,17 +2,20 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import gettext as _
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import gettext as _
+
+from .managers import AuthorQuerySet, BookQuerySet
 
 
 @python_2_unicode_compatible
 class Author(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=100)
     last_name = models.CharField(verbose_name=_('last name'), max_length=100)
+
+    objects = AuthorQuerySet.as_manager()
 
     def __str__(self):
         return '{} {}'.format(self.name, self.last_name)
@@ -82,6 +85,8 @@ class Book(models.Model):
     notes = models.CharField(verbose_name=_('notes'), max_length=200, blank=True)
     loan_status = models.CharField(max_length=100, choices=LOAN_STATUS_CHOICES, default='D')
 
+    objects = BookQuerySet.as_manager()
+
     def __str__(self):
         return self.title  
 
@@ -96,7 +101,7 @@ class Book(models.Model):
 @python_2_unicode_compatible
 class Loan(models.Model):
     loan_holder = models.CharField(verbose_name=_('loan holder'), max_length=150, blank=True)
-    loan_date = models.DateTimeField(verbose_name=_('loan date'), blank=True, null=True) 
+    loan_date = models.DateTimeField(verbose_name=_('loan date'), blank=True, null=True, auto_now_add=True)
     book = models.ForeignKey(Book, verbose_name=_('book'), on_delete=models.CASCADE)
 
     class Meta:

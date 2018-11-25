@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <input class="btn btn-info bt-lg borrow-it" type="submit" value="{% trans 'Borrow it' %}" />
+    </p>
+    </form>
+{% endblock %}

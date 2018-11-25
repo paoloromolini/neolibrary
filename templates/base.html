@@ -18,7 +18,7 @@
             <li><a href="/admin">{% trans 'Admin' %}</a></li>
         </ul>
         <header class="site-header">
-            <h1>{{ site.name }} <img src="{% static 'imgs/logo.png' %}" class="logo"/></h1>
+            <h1><a href="/">{{ site.name }} <img src="{% static 'imgs/logo.png' %}" class="logo"/></a></h1>
         </header>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -37,5 +37,6 @@
 </div>
  <script src="http://code.jquery.com/jquery.js"></script>
  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
  </body>
 </html>

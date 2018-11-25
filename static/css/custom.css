@@ -1,7 +1,34 @@
+@font-face {
+    font-family: neocat;
+    src: url(/static/fonts/neocat.woff);
+}
+
 .logo {
-    width: 120px;
+    width: 100px;
 }
 
 .site-header {
     padding: 10px;
+    font-family: neocat;
+}
+
+.site-header h1 {
+    color: #471413;
+    font-family: neocat;
+}
+
+.breadcrumb {
+    padding: 0.3rem 0.5rem
+}
+.breadcrumb li a {
+    font-size: 0.9em;
+}
+
+.author-auto-complete li {
+    cursor: pointer;
+}
+
+.borrow-it {
+    color: #fff !important;
+    padding: 11px 24px;
 }

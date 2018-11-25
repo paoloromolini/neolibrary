@@ -4,6 +4,11 @@
 {% block content %}
 
 {% include 'history_back_btn.html' %}
+{% if object.loan_status == 'D' %}
+    <a class="btn btn-info bt-lg borrow-it">{% trans 'Borrow it' %}</a>
+{% elif object.loan_status == 'P' %}
+    <a class="btn btn-warning bt-lg borrow-it">{% trans 'Return it' %}</a>
+{% endif %}
 <hr>
 <dl class="row">
     <dt class="col-sm-3">{% trans 'Title:' %}</dt>
@@ -23,6 +28,8 @@
             <dd class="col-sm-8">{{ object.palco }}</dd>
             <dt class="col-sm-4">{% trans 'Number:' %}</dt>
             <dd class="col-sm-8">{{ object.number }}</dd>
+            <dt class="col-sm-4">{% trans 'Loan status:' %}</dt>
+            <dd class="col-sm-8">{{ object.get_loan_status_display }}</dd>
         </dl>
     </dd>
     {% if object.year_edition %}
