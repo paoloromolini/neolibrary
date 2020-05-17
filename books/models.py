@@ -46,7 +46,10 @@ class Genre(models.Model):
     code = models.CharField(verbose_name=_('code'), max_length=10)
 
     def __str__(self):
-        return '{} {}'.format(self.code ,self.name)
+        if self.code == self.name:
+            return self.code
+        else:
+            return '{} {}'.format(self.code ,self.name)
 
     class Meta:
         ordering = ('code',)

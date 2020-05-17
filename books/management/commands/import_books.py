@@ -47,7 +47,7 @@ class Command(BaseCommand):
                             genre = genre_arg
                         genre = genre.strip()
                         g, __ = Genre.objects.get_or_create(
-                            name=genre)
+                            name=genre, code=genre)
                         a, __ = Author.objects.get_or_create(
                             name=author
                         )
