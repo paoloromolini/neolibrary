@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
@@ -43,10 +44,10 @@ class Publisher(models.Model):
 @python_2_unicode_compatible
 class Genre(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=100)
-    code = models.CharField(verbose_name=_('code'), max_length=10)
+    code = models.CharField(verbose_name=_('code'), max_length=256)
 
     def __str__(self):
-        if self.code == self.name:
+        if not settings.USE_GENRE_NAME:
             return self.code
         else:
             return '{} {}'.format(self.code ,self.name)
@@ -70,13 +71,13 @@ class Book(models.Model):
     publisher = models.ForeignKey(
         Publisher, verbose_name=_('publisher'),
         blank=True, null=True,
-        on_delete=models.CASCADE, related_name='publishers'
+        on_delete=models.CASCADE, related_name='books_from_publsher'
     )
     genre = models.ForeignKey(
         Genre, verbose_name=_('genre'),
         blank=True, null=True,
         on_delete=models.CASCADE,
-        related_name='genres'
+        related_name='books'
     )
     column = models.IntegerField(verbose_name=_('column'))
     palco = models.CharField(verbose_name=_('palco'), max_length=4, blank=True, null=True)
