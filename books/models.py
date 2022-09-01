@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import gettext as _
 
 from .managers import AuthorQuerySet, BookQuerySet
 
 
-@python_2_unicode_compatible
 class Author(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=100)
     last_name = models.CharField(verbose_name=_('last name'), max_length=100)
@@ -29,7 +24,6 @@ class Author(models.Model):
         return reverse('author-detail', kwargs={'pk': self.pk})       
 
 
-@python_2_unicode_compatible
 class Publisher(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=100)
 
@@ -41,7 +35,6 @@ class Publisher(models.Model):
         verbose_name_plural = _('Publishers')
 
 
-@python_2_unicode_compatible
 class Genre(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=100)
     code = models.CharField(verbose_name=_('code'), max_length=256)
@@ -58,7 +51,6 @@ class Genre(models.Model):
         verbose_name_plural = _('Genres')
 
 
-@python_2_unicode_compatible
 class Book(models.Model):
     AVALAIBLE = 'D'
     LENT = 'P'
@@ -102,7 +94,6 @@ class Book(models.Model):
         verbose_name_plural = _('Books')
 
 
-@python_2_unicode_compatible
 class Loan(models.Model):
     loan_holder = models.CharField(verbose_name=_('loan holder'), max_length=150, blank=True)
     loan_date = models.DateTimeField(verbose_name=_('loan date'), blank=True, null=True, auto_now_add=True)
