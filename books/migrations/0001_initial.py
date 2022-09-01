@@ -8,99 +8,215 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Author',
+            name="Author",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='nome')),
-                ('last_name', models.CharField(max_length=100, verbose_name='cognome')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="nome")),
+                ("last_name", models.CharField(max_length=100, verbose_name="cognome")),
             ],
             options={
-                'verbose_name': 'Author',
-                'verbose_name_plural': 'Authors',
+                "verbose_name": "Author",
+                "verbose_name_plural": "Authors",
             },
         ),
         migrations.CreateModel(
-            name='Book',
+            name="Book",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200, verbose_name='title')),
-                ('column', models.IntegerField(verbose_name='column')),
-                ('palco', models.CharField(blank=True, max_length=4, null=True, verbose_name='palco')),
-                ('number', models.IntegerField(verbose_name='number')),
-                ('year_edition', models.IntegerField(blank=True, null=True, verbose_name='year edition')),
-                ('reprint_year', models.IntegerField(blank=True, null=True, verbose_name='reprint year')),
-                ('main_topic', models.CharField(blank=True, max_length=200, verbose_name='main topic')),
-                ('secondary_topic', models.CharField(blank=True, max_length=200, verbose_name='secondary topic')),
-                ('notes', models.CharField(blank=True, max_length=200, verbose_name='notes')),
-                ('loan_status', models.CharField(choices=[('D', 'Available'), ('P', 'Lent')], default='D', max_length=100)),
-                ('author', models.ManyToManyField(to='books.Author', verbose_name='author')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200, verbose_name="title")),
+                ("column", models.IntegerField(verbose_name="column")),
+                (
+                    "palco",
+                    models.CharField(
+                        blank=True, max_length=4, null=True, verbose_name="palco"
+                    ),
+                ),
+                ("number", models.IntegerField(verbose_name="number")),
+                (
+                    "year_edition",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="year edition"
+                    ),
+                ),
+                (
+                    "reprint_year",
+                    models.IntegerField(
+                        blank=True, null=True, verbose_name="reprint year"
+                    ),
+                ),
+                (
+                    "main_topic",
+                    models.CharField(
+                        blank=True, max_length=200, verbose_name="main topic"
+                    ),
+                ),
+                (
+                    "secondary_topic",
+                    models.CharField(
+                        blank=True, max_length=200, verbose_name="secondary topic"
+                    ),
+                ),
+                (
+                    "notes",
+                    models.CharField(blank=True, max_length=200, verbose_name="notes"),
+                ),
+                (
+                    "loan_status",
+                    models.CharField(
+                        choices=[("D", "Available"), ("P", "Lent")],
+                        default="D",
+                        max_length=100,
+                    ),
+                ),
+                (
+                    "author",
+                    models.ManyToManyField(to="books.Author", verbose_name="author"),
+                ),
             ],
             options={
-                'verbose_name': 'Book',
-                'verbose_name_plural': 'Books',
+                "verbose_name": "Book",
+                "verbose_name_plural": "Books",
             },
         ),
         migrations.CreateModel(
-            name='Genre',
+            name="Genre",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='nome')),
-                ('code', models.CharField(max_length=10, verbose_name='code')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="nome")),
+                ("code", models.CharField(max_length=10, verbose_name="code")),
             ],
             options={
-                'verbose_name': 'Genre',
-                'verbose_name_plural': 'Genres',
+                "verbose_name": "Genre",
+                "verbose_name_plural": "Genres",
             },
         ),
         migrations.CreateModel(
-            name='Loan',
+            name="Loan",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('loan_holder', models.CharField(blank=True, max_length=150, verbose_name='loan holder')),
-                ('loan_date', models.DateTimeField(blank=True, null=True, verbose_name='loan date')),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='books.Book', verbose_name='book')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "loan_holder",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="loan holder"
+                    ),
+                ),
+                (
+                    "loan_date",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="loan date"
+                    ),
+                ),
+                (
+                    "book",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="books.Book",
+                        verbose_name="book",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Loan',
-                'verbose_name_plural': 'Loans',
+                "verbose_name": "Loan",
+                "verbose_name_plural": "Loans",
             },
         ),
         migrations.CreateModel(
-            name='Publisher',
+            name="Publisher",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='nome')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="nome")),
             ],
             options={
-                'verbose_name': 'Publisher',
-                'verbose_name_plural': 'Publishers',
+                "verbose_name": "Publisher",
+                "verbose_name_plural": "Publishers",
             },
         ),
         migrations.CreateModel(
-            name='Website',
+            name="Website",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.URLField()),
-                ('description', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("url", models.URLField()),
+                ("description", models.CharField(max_length=200)),
             ],
             options={
-                'verbose_name': 'Website',
-                'verbose_name_plural': 'Websites',
+                "verbose_name": "Website",
+                "verbose_name_plural": "Websites",
             },
         ),
         migrations.AddField(
-            model_name='book',
-            name='genre',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='genres', to='books.Genre', verbose_name='genre'),
+            model_name="book",
+            name="genre",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="genres",
+                to="books.Genre",
+                verbose_name="genre",
+            ),
         ),
         migrations.AddField(
-            model_name='book',
-            name='publisher',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='publishers', to='books.Publisher', verbose_name='publisher'),
+            model_name="book",
+            name="publisher",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="publishers",
+                to="books.Publisher",
+                verbose_name="publisher",
+            ),
         ),
     ]

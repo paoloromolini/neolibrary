@@ -4,21 +4,19 @@ from django.db.models import Value
 
 
 class BookQuerySet(models.QuerySet):
-
     def available(self):
         from .models import Book
+
         return self.filter(loan_status=Book.AVALAIBLE)
 
     def lent(self):
         from .models import Book
+
         return self.filter(loan_status=Book.LENT)
 
 
 class AuthorQuerySet(models.QuerySet):
-
     def search(self, query):
-        return self.annotate(
-            full_name=Concat('name', Value(' '), 'last_name')
-        ).filter(
+        return self.annotate(full_name=Concat("name", Value(" "), "last_name")).filter(
             full_name__icontains=query
         )
