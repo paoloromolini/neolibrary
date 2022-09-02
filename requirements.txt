@@ -38,6 +38,8 @@ pyflakes==1.6.0
     # via
     #   -r requirements.in
     #   flake8
+python-dotenv==0.20.0
+    # via -r requirements.in
 pytz==2018.4
     # via -r requirements.in
 sqlparse==0.4.2
