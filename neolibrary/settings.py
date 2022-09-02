@@ -110,7 +110,12 @@ STATIC_URL = "/static/"
 
 SITE_ID = 1
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, "locale"),
