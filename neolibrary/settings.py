@@ -131,3 +131,5 @@ LANGUAGES = (
     ('pt', _('Portuguese')),
     ('af', _('Afrikaans')),
 )
+
+SITE_ROOT = "/"

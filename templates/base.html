@@ -15,16 +15,16 @@
 <div class="container">
     <div class="main-header">
         <ul class="nav nav-tabs">
-            <li><a href="admin">{% trans 'Admin' %}</a></li>
+            <li><a href="{{ site_root}}admin">{% trans 'Admin' %}</a></li>
         </ul>
         <header class="site-header">
-            <h1><a href="{{ site.domain }}">{{ site.name }} <img src="{% static 'imgs/logo.png' %}" class="logo"/></a></h1>
+            <h1><a href="{{ site_root}}">{{ site.name }} <img src="{% static 'imgs/logo.png' %}" class="logo"/></a></h1>
         </header>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item" aria-current="page">
                     <span class="glyphicon glyphicon-home"></span>
-                    <a href="/" class="">{% trans 'Home' %}</a>
+                    <a href="{{ site_root}}" class="">{% trans 'Home' %}</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page">
                     <a href="{{ object.get_absolute_url }}">{{ object }}</a>
@@ -38,7 +38,7 @@
  <script src="http://code.jquery.com/jquery.js"></script>
  <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script>
-    var site = "{{ site.domain }}";
+    var site = "{{ site_root }}";
 </script>
 <script src="{% static 'js/main.js' %}"></script>
  </body>

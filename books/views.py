@@ -5,6 +5,7 @@ from .models import Author, Book, Genre, Loan
 from .forms import SearchBooksForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.db.models import Q
+from django.conf import settings
 
 from simple_search import search_filter
 
@@ -15,6 +16,7 @@ class CurrentSiteMixin(object):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["site"] = get_current_site(self.request)
+        context["site_root"] = settings.SITE_ROOT
         return context
 
 
