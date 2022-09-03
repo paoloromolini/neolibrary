@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext as _
+from isbn_field import ISBNField
 
 from .managers import AuthorQuerySet, BookQuerySet
 
@@ -60,6 +61,11 @@ class Book(models.Model):
     )
     title = models.CharField(verbose_name=_("title"), max_length=200, unique=False)
     author = models.ManyToManyField(Author, verbose_name="author")
+    language = models.CharField(
+        verbose_name=_("language"),
+        choices=settings.LANGUAGES,
+        max_length=2,
+        blank=True, null=True)
     publisher = models.ForeignKey(
         Publisher,
         verbose_name=_("publisher"),
@@ -93,6 +99,7 @@ class Book(models.Model):
     secondary_topic = models.CharField(
         verbose_name=_("secondary topic"), max_length=200, blank=True
     )
+    isbn = ISBNField(null=True, blank=True)
     notes = models.CharField(verbose_name=_("notes"), max_length=200, blank=True)
     loan_status = models.CharField(
         max_length=100, choices=LOAN_STATUS_CHOICES, default="D"

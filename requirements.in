@@ -7,3 +7,4 @@ pyflakes==1.6.0
 pytz==2018.4
 black
 python-dotenv
+django-isbn-field

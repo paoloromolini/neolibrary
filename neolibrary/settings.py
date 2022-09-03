@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
@@ -121,5 +122,12 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, "locale"),
 ]
 
-
 USE_GENRE_NAME = True
+
+LANGUAGES = (
+    ('it', _('Italian')),
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    ('pt', _('Portuguese')),
+    ('af', _('Afrikaans')),
+)

@@ -18,8 +18,10 @@ class BookAdmin(admin.ModelAdmin):
                 "fields": (
                     "title",
                     "author",
+                    "language",
                     "publisher",
                     "genre",
+                    "isbn",
                 )
             },
         ),
