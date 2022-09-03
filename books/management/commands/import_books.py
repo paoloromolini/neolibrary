@@ -30,14 +30,14 @@ class Command(BaseCommand):
                 spamreader = csv.reader(
                     csvfile,
                     quotechar='"',
-                    delimiter=",",
+                    delimiter=";",
                     quoting=csv.QUOTE_ALL,
                     skipinitialspace=True,
                 )
                 for row in spamreader:
                     try:
-                        title, author, editor, genre, language, year = row
-                        if title == "Título":
+                        title, author, editor, year, __, language, genre, __,  isbn, __ = row
+                        if title == "Title":
                             continue
                         if genre_arg:
                             genre = genre_arg
@@ -49,10 +49,13 @@ class Command(BaseCommand):
                             p = p[0]
                         else:
                             p = Publisher.objects.create(name=editor)
+                        language = language.lower()[:2] if language else None
                         b, __ = Book.objects.get_or_create(
                             title=title,
                             year_edition=int(year) if str.isdigit(year) else None,
+                            language=language,
                             genre=g,
+                            isbn=isbn,
                             publisher=p,
                             column=0,
                             number=0,
