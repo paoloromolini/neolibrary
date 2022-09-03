@@ -7,6 +7,25 @@ from django.utils.translation import gettext as _
 from .managers import AuthorQuerySet, BookQuerySet
 
 
+class Seminary(models.Model):
+    name = models.CharField(verbose_name=_("name"), max_length=100)
+    slug = models.SlugField(
+        verbose_name=_("name"), max_length=100, unique=True)
+    telephone = models.CharField(
+        verbose_name=_("telephone"), max_length=100, null=True)
+    email = models.EmailField(verbose_name=_("email"), null=True)
+    address = models.TextField(verbose_name=_("address"), null=True)
+    info = models.TextField(verbose_name=_("info"), null=True)
+    is_active = models.BooleanField()
+
+    def __str__(self):
+        return "{}".format(self.name)
+
+    class Meta:
+        verbose_name = _("Seminary")
+        verbose_name_plural = _("Seminaries")
+
+
 class Author(models.Model):
     name = models.CharField(verbose_name=_("name"), max_length=100)
     last_name = models.CharField(verbose_name=_("last name"), max_length=100)
@@ -58,7 +77,17 @@ class Book(models.Model):
         (AVALAIBLE, _("Available")),
         (LENT, _("Lent")),
     )
-    title = models.CharField(verbose_name=_("title"), max_length=200, unique=False)
+    title = models.CharField(
+        verbose_name=_("title"), max_length=200, unique=False)
+    language = models.CharField(
+        verbose_name=_("language"),
+        choices=settings.LANGUAGES,
+        max_length=2,
+        blank=True, null=True)
+    seminary = models.ForeignKey(
+        Seminary,
+        verbose_name=_("seminary"),
+        on_delete=models.CASCADE)
     author = models.ManyToManyField(Author, verbose_name="author")
     publisher = models.ForeignKey(
         Publisher,
@@ -93,7 +122,8 @@ class Book(models.Model):
     secondary_topic = models.CharField(
         verbose_name=_("secondary topic"), max_length=200, blank=True
     )
-    notes = models.CharField(verbose_name=_("notes"), max_length=200, blank=True)
+    notes = models.CharField(
+        verbose_name=_("notes"), max_length=200, blank=True)
     loan_status = models.CharField(
         max_length=100, choices=LOAN_STATUS_CHOICES, default="D"
     )
