@@ -1,6 +1,6 @@
 let author = $('input[name="author"]');
 author.keyup(function() {
-    $.get('/authors?q=' + author.val(), function( data ) {
+    $.get(site + '/authors?q=' + author.val(), function( data ) {
         let authorAutoComplete = $('.author-auto-complete');
         if (authorAutoComplete.length > 0 ) {
             authorAutoComplete.replaceWith(data);
