@@ -1,9 +1,11 @@
 from django.views.generic.list import ListView
+from django.http import HttpResponseRedirect
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from .models import Author, Book, Genre, Loan
 from .forms import SearchBooksForm
 from django.contrib.sites.shortcuts import get_current_site
+from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.conf import settings
 
@@ -96,7 +98,6 @@ class LoanCreateView(CurrentSiteMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(self.kwargs)
         context["book"] = 1
         return context
 
@@ -106,3 +107,10 @@ class LoanCreateView(CurrentSiteMixin, CreateView):
         book.loan_status = Book.LENT
         book.save()
         return super().form_valid(form)
+
+
+def return_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id, loan_status=Book.LENT)
+    book.loan_status = Book.AVAILABLE
+    book.save(update_fields=["loan_status"])
+    return HttpResponseRedirect(book.get_absolute_url())

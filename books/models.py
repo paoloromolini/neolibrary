@@ -22,7 +22,7 @@ class Author(models.Model):
         verbose_name_plural = _("Authors")
 
     def get_absolute_url(self):
-        return reverse("author-detail", kwargs={"pk": self.pk})
+        return reverse("books:author-detail", kwargs={"pk": self.pk})
 
 
 class Publisher(models.Model):
@@ -53,10 +53,10 @@ class Genre(models.Model):
 
 
 class Book(models.Model):
-    AVALAIBLE = "D"
+    AVAILABLE = "D"
     LENT = "P"
     LOAN_STATUS_CHOICES = (
-        (AVALAIBLE, _("Available")),
+        (AVAILABLE, _("Available")),
         (LENT, _("Lent")),
     )
     title = models.CharField(verbose_name=_("title"), max_length=200, unique=False)
@@ -111,7 +111,7 @@ class Book(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("book-detail", kwargs={"pk": self.pk})
+        return reverse("books:book-detail", kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name = _("Book")
@@ -130,6 +130,9 @@ class Loan(models.Model):
     class Meta:
         verbose_name = _("Loan")
         verbose_name_plural = _("Loans")
+
+    def __str__(self):
+        return f"{self.book.title} borrowed by {self.loan_holder}"
 
 
 class Website(models.Model):

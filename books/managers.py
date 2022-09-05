@@ -7,7 +7,7 @@ class BookQuerySet(models.QuerySet):
     def available(self):
         from .models import Book
 
-        return self.filter(loan_status=Book.AVALAIBLE)
+        return self.filter(loan_status=Book.AVAILABLE)
 
     def lent(self):
         from .models import Book

@@ -5,9 +5,11 @@
 
 {% include 'history_back_btn.html' %}
 {% if object.loan_status == 'D' %}
-    <a class="btn btn-info bt-lg borrow-it">{% trans 'Borrow it' %}</a>
+    <a href="{% url 'books:loan-create-view' book_id=object.pk %}"
+            class="btn btn-info bt-lg borrow-it">{% trans 'Borrow it' %}</a>
 {% elif object.loan_status == 'P' %}
-    <a class="btn btn-warning bt-lg borrow-it">{% trans 'Return it' %}</a>
+    <a href="{% url 'books:return-book' book_id=object.pk %}"
+            class="btn btn-warning bt-lg borrow-it">{% trans 'Return it' %}</a>
 {% endif %}
 <hr>
 <dl class="row">
@@ -30,6 +32,8 @@
             <dd class="col-sm-8">{{ object.number }}</dd>
             <dt class="col-sm-4">{% trans 'Loan status:' %}</dt>
             <dd class="col-sm-8">{{ object.get_loan_status_display }}</dd>
+            <dt class="col-sm-4">ISBN</dt>
+            <dd class="col-sm-8">{{ object.isbn | default_if_none:"-" }}</dd>
         </dl>
     </dd>
     {% if object.year_edition %}
