@@ -65,7 +65,9 @@ class Book(models.Model):
         verbose_name=_("language"),
         choices=settings.LANGUAGES,
         max_length=2,
-        blank=True, null=True)
+        blank=True,
+        null=True,
+    )
     publisher = models.ForeignKey(
         Publisher,
         verbose_name=_("publisher"),

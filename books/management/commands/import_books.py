@@ -36,7 +36,18 @@ class Command(BaseCommand):
                 )
                 for row in spamreader:
                     try:
-                        title, author, editor, year, __, language, genre, __,  isbn, __ = row
+                        (
+                            title,
+                            author,
+                            editor,
+                            year,
+                            __,
+                            language,
+                            genre,
+                            __,
+                            isbn,
+                            __,
+                        ) = row
                         if title == "Title":
                             continue
                         if genre_arg:

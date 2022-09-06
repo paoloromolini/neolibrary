@@ -31,7 +31,12 @@
             <dt class="col-sm-4">{% trans 'Number:' %}</dt>
             <dd class="col-sm-8">{{ object.number }}</dd>
             <dt class="col-sm-4">{% trans 'Loan status:' %}</dt>
-            <dd class="col-sm-8">{{ object.get_loan_status_display }}</dd>
+            <dd class="col-sm-8">
+                {{ object.get_loan_status_display }}
+                {% if user.is_authenticated %}
+                by {{ object.loan_set.last.loan_holder }}
+                {% endif %}
+            </dd>
             <dt class="col-sm-4">ISBN</dt>
             <dd class="col-sm-8">{{ object.isbn | default_if_none:"-" }}</dd>
         </dl>
