@@ -1,15 +1,19 @@
-from django.views.generic.list import ListView
+import csv
+from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
+from django.db.models import Q
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.http import StreamingHttpResponse
+from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
-from .models import Author, Book, Genre, Loan
-from .forms import SearchBooksForm
-from django.contrib.sites.shortcuts import get_current_site
-from django.shortcuts import get_object_or_404
-from django.db.models import Q
-from django.conf import settings
-
+from django.views.generic.list import ListView
+from django.views.generic.base import TemplateView
 from simple_search import search_filter
+
+from .forms import SearchBooksForm
+from .models import Author, Book, Genre, Loan
 
 
 class CurrentSiteMixin(object):
@@ -114,3 +118,40 @@ def return_book(request, book_id):
     book.loan_status = Book.AVAILABLE
     book.save(update_fields=["loan_status"])
     return HttpResponseRedirect(book.get_absolute_url())
+
+
+class Echo:
+    """An object that implements just the write method of the file-like
+    interface.
+    """
+    def write(self, value):
+        """Write the value by returning it, instead of storing in a buffer."""
+        return value
+
+
+def export_books_to_csv_view(request):
+    """A view that streams a large CSV file."""
+    # Generate a sequence of rows. The range is based on the maximum number of
+    # rows that can be handled by a single sheet in most spreadsheet
+    # applications.
+    rows = ([
+        str(book),
+        ",".join([str(author) for author in book.author.all()]),
+        str(book.publisher),
+        str(book.genre),
+        book.year_edition
+    ] for book in Book.objects.all().order_by(["author", "genre"]))
+    pseudo_buffer = Echo()
+    writer = csv.writer(pseudo_buffer)
+    return StreamingHttpResponse(
+        (writer.writerow(row) for row in rows),
+        content_type="text/csv",
+        headers={
+            f'Content-Disposition': 'attachment; filename="books.csv"'},
+    )
+
+
+class BooksStampsView(ListView):
+    template_name = "books/book_stamp.html"
+    model = Book
+    paginate_by = 5

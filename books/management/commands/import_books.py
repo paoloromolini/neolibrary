@@ -6,7 +6,6 @@ from django.utils.text import slugify
 
 
 class Command(BaseCommand):
-
     """Rebuild all projects command"""
 
     help = "Import books from a csv"
@@ -30,13 +29,18 @@ class Command(BaseCommand):
                 spamreader = csv.reader(
                     csvfile,
                     quotechar='"',
-                    delimiter=";",
+                    delimiter=",",
                     quoting=csv.QUOTE_ALL,
                     skipinitialspace=True,
                 )
                 for row in spamreader:
+                    title = None
+                    ['ID', 'Title ', 'Auctor/Editor', 'Publisher ',
+                     'Year Published', 'Place Published', 'Language ',
+                     'Subject', 'ISBN', 'Volumes', 'Edition']
                     try:
                         (
+                            __,
                             title,
                             author,
                             editor,
@@ -44,8 +48,8 @@ class Command(BaseCommand):
                             __,
                             language,
                             genre,
-                            __,
                             isbn,
+                            __,
                             __,
                         ) = row
                         if title == "Title":
@@ -53,7 +57,8 @@ class Command(BaseCommand):
                         if genre_arg:
                             genre = genre_arg
                         genre = genre.strip()
-                        g, __ = Genre.objects.get_or_create(name=genre, code=genre)
+                        g, __ = Genre.objects.get_or_create(name=genre,
+                                                            code=genre)
                         a, __ = Author.objects.get_or_create(name=author)
                         p = Publisher.objects.filter(name=editor)
                         if p:
@@ -63,7 +68,8 @@ class Command(BaseCommand):
                         language = language.lower()[:2] if language else None
                         b, __ = Book.objects.get_or_create(
                             title=title,
-                            year_edition=int(year) if str.isdigit(year) else None,
+                            year_edition=int(year) if str.isdigit(
+                                year) else None,
                             language=language,
                             genre=g,
                             isbn=isbn,

@@ -62,11 +62,11 @@
             {% if page_obj.has_previous %}
                 {% if not search %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'book-list' %}?page={{ page_obj.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
+                        <a class="page-link" href="{% url 'books:book-list' %}?page={{ page_obj.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
                     </li>
                 {% else %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ page_obj.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
+                        <a class="page-link" href="{% url 'books:book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ page_obj.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
                     </li>
                 {% endif %}
             {% else %}
@@ -75,16 +75,16 @@
                 </li>
             {% endif %} 
             {% for object in page_obj.paginator.page_range %}
-                <li class="page-item"><a class="page-link" href="{% url 'book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                <li class="page-item"><a class="page-link" href="{% url 'books:book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
             {% endfor %} 
             {% if page_obj.has_next %}
                 {% if not search %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'book-list' %}?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                        <a class="page-link" href="{% url 'books:book-list' %}?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
                     </li>
                 {% else %}
                     <li class="page-item">
-                        <a class="page-link" href="{% url 'book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                        <a class="page-link" href="{% url 'books:book-list' %}?{% for k,v in search.items %}{{ k }}={{v}}&{% endfor %}&page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
                     </li>
                 {% endif %}
             {% else %}

@@ -15,7 +15,25 @@
 <div class="container">
     <div class="main-header">
         <ul class="nav nav-tabs">
-            <li><a href="{{ site_root}}admin">{% trans 'Admin' %}</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ site_root }}admin">
+                    {% trans 'Admin' %}
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ site_root}}{% url 'books:export-to-csv' %}">
+                    {% trans 'Export books to CSV' %}
+                </a>
+            </li>
+            {% comment %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ site_root }}{% url 'books:books-stamps' %}">
+                    {% trans 'Books stamps' %}
+                </a>
+            </li>
+            {% endcomment %}
+            {% endif %}
         </ul>
         <header class="site-header">
             <h1><a href="{{ site_root}}">{{ site.name }} <img src="{% static 'imgs/logo.png' %}" class="logo"/></a></h1>
