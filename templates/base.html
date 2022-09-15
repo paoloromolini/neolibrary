@@ -22,13 +22,13 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ site_root}}{% url 'books:export-to-csv' %}">
+                <a class="nav-link" href="{% url 'books:export-to-csv' %}">
                     {% trans 'Export books to CSV' %}
                 </a>
             </li>
             {% comment %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ site_root }}{% url 'books:books-stamps' %}">
+                <a class="nav-link" href="{% url 'books:books-stamps' %}">
                     {% trans 'Books stamps' %}
                 </a>
             </li>
