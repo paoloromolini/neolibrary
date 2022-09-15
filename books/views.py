@@ -140,7 +140,7 @@ def export_books_to_csv_view(request):
         str(book.publisher),
         str(book.genre),
         book.year_edition
-    ] for book in Book.objects.all().order_by(["author", "genre"]))
+    ] for book in Book.objects.all().order_by("author", "genre"))
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
     return StreamingHttpResponse(
