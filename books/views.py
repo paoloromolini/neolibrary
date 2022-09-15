@@ -154,4 +154,4 @@ def export_books_to_csv_view(request):
 class BooksStampsView(ListView):
     template_name = "books/book_stamp.html"
     model = Book
-    paginate_by = 5
+    paginate_by = None
