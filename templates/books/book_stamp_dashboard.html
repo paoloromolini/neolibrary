@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 {% block content %}
-    <h1>Book stamps</h1>
+    <h1>Book stamps {% if book %}for {{ book }}{% elif author %}for {{ author }}{% endif %}</h1>
     <ul>
         <li class="">
-            <a class="" href="{% url 'books:books-stamps' %}">
+            <a class="" href="{% url 'books:books-stamps-front' %}{% if book %}?id={{ book.id }}{% elif author %}?author={{ author.id }}{% endif %}" target="_blank">
                 {% trans 'Books stamps front' %}
             </a>
         </li>
         <li class="">
-            <a class="" href="{% url 'books:books-stamps-side' %}">
+            <a class="" href="{% url 'books:books-stamps-side' %}{% if book %}?id={{ book.id }}{% elif author %}?author={{ author.id }}{% endif %}" target="_blank">
                 {% trans 'Books stamps side' %}
             </a>
         </li>

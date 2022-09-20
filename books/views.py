@@ -1,8 +1,8 @@
 import csv
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
-from django.db.models import Q
-from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
 from django.http import StreamingHttpResponse
 from django.shortcuts import get_object_or_404
@@ -113,6 +113,7 @@ class LoanCreateView(CurrentSiteMixin, CreateView):
         return super().form_valid(form)
 
 
+@staff_member_required
 def return_book(request, book_id):
     book = get_object_or_404(Book, id=book_id, loan_status=Book.LENT)
     book.loan_status = Book.AVAILABLE
@@ -124,45 +125,71 @@ class Echo:
     """An object that implements just the write method of the file-like
     interface.
     """
+
     def write(self, value):
         """Write the value by returning it, instead of storing in a buffer."""
         return value
 
 
+@staff_member_required
 def export_books_to_csv_view(request):
     """A view that streams a large CSV file."""
     # Generate a sequence of rows. The range is based on the maximum number of
     # rows that can be handled by a single sheet in most spreadsheet
     # applications.
-    rows = ([
-        str(book),
-        ",".join([str(author) for author in book.author.all()]),
-        str(book.publisher),
-        str(book.genre),
-        book.year_edition
-    ] for book in Book.objects.all().order_by("author", "genre"))
+    rows = (
+        [
+            str(book),
+            ",".join([str(author) for author in book.author.all()]),
+            str(book.publisher),
+            str(book.genre),
+            book.year_edition,
+        ]
+        for book in Book.objects.all().order_by("author", "genre")
+    )
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
     return StreamingHttpResponse(
         (writer.writerow(row) for row in rows),
         content_type="text/csv",
-        headers={
-            f'Content-Disposition': 'attachment; filename="books.csv"'},
+        headers={f"Content-Disposition": 'attachment; filename="books.csv"'},
     )
 
 
+@method_decorator(staff_member_required, name="dispatch")
 class BooksStampsDashboard(CurrentSiteMixin, TemplateView):
     template_name = "books/book_stamp_dashboard.html"
     model = Book
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["author"] = Author.objects.filter(
+            id=self.request.GET.get("author")
+        ).first()
+        context["book"] = Book.objects.filter(id=self.request.GET.get("id")).first()
+        return context
 
+
+@method_decorator(staff_member_required, name="dispatch")
 class BooksStampsView(CurrentSiteMixin, ListView):
     template_name = "books/book_stamp.html"
     model = Book
     paginate_by = None
 
+    def get_queryset(self):
+        queryset = Book.objects.all().order_by("title", "author")
+        id_filter = self.request.GET.get("id")
+        author_id_filter = self.request.GET.get("author")
+        if id_filter:
+            queryset = queryset.filter(id=id_filter)
+        if author_id_filter:
+            print(author_id_filter)
+            queryset = queryset.filter(author__id__in=[author_id_filter])
+        return queryset
 
-class BooksStampsSideView(CurrentSiteMixin, ListView):
+
+@method_decorator(staff_member_required, name="dispatch")
+class BooksStampsSideView(BooksStampsView):
     template_name = "books/book_stamp_side.html"
     model = Book
     paginate_by = None

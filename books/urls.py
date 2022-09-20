@@ -24,8 +24,8 @@ urlpatterns = [
 
     path("books-stamps", BooksStampsDashboard.as_view(),
          name="books-stamps-dashboard"),
-    path("books-stamps-front", BooksStampsView.as_view(), name="books-stamps"),
+    path("books-stamps-front", BooksStampsView.as_view(),
+         name="books-stamps-front"),
     path("books-stamps-side", BooksStampsSideView.as_view(),
          name="books-stamps-side"),
-
 ]
