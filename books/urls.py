@@ -6,7 +6,8 @@ from .views import (
     BookListView,
     BookDetailView,
     LoanCreateView,
-    return_book, export_books_to_csv_view, BooksStampsView
+    return_book, export_books_to_csv_view, BooksStampsView, BooksStampsSideView,
+    BooksStampsDashboard
 )
 
 app_name = "books"
@@ -20,5 +21,11 @@ urlpatterns = [
          LoanCreateView.as_view(), name="loan-create-view"),
     path("<int:book_id>/return-book/", return_book, name="return-book"),
     path("export-to-csv", export_books_to_csv_view, name="export-to-csv"),
-    path("books-stamps", BooksStampsView.as_view(), name="books-stamps"),
+
+    path("books-stamps", BooksStampsDashboard.as_view(),
+         name="books-stamps-dashboard"),
+    path("books-stamps-front", BooksStampsView.as_view(), name="books-stamps"),
+    path("books-stamps-side", BooksStampsSideView.as_view(),
+         name="books-stamps-side"),
+
 ]

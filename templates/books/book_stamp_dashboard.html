@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block content %}
+    <h1>Book stamps</h1>
+    <ul>
+        <li class="">
+            <a class="" href="{% url 'books:books-stamps' %}">
+                {% trans 'Books stamps front' %}
+            </a>
+        </li>
+        <li class="">
+            <a class="" href="{% url 'books:books-stamps-side' %}">
+                {% trans 'Books stamps side' %}
+            </a>
+        </li>
+    </ul>
+
+{% endblock content %}

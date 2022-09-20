@@ -1,15 +1,16 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-size: 0.75em;
 }
 
-@media print
-{
-   @page
-   {
-    size: A4;
-    size: portrait;
-  }
+span {
+    padding-bottom: 5px;
+}
+
+.logo {
+    margin-top: 5px;
+    width: 45px;
 }
 
 .wrapper {
@@ -18,13 +19,14 @@ body {
 }
 
 .box {
+    text-align: center;
     border: 1px dashed black;
     border-top: 0;
     border-left: 0;
     display: block;
-    width: 260px;
-    height: 200px;
-    padding: 5px;
+    width: 102px;
+    height: 400px;
+    padding: 2px;
     float: left;
 }
 

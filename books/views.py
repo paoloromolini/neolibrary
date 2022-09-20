@@ -151,7 +151,18 @@ def export_books_to_csv_view(request):
     )
 
 
-class BooksStampsView(ListView):
+class BooksStampsDashboard(CurrentSiteMixin, TemplateView):
+    template_name = "books/book_stamp_dashboard.html"
+    model = Book
+
+
+class BooksStampsView(CurrentSiteMixin, ListView):
     template_name = "books/book_stamp.html"
+    model = Book
+    paginate_by = None
+
+
+class BooksStampsSideView(CurrentSiteMixin, ListView):
+    template_name = "books/book_stamp_side.html"
     model = Book
     paginate_by = None

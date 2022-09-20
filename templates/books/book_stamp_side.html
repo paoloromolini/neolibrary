@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" ><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" ><!--<![endif]-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="{% static 'css/print-side.css' %}" rel="stylesheet" media="print">
+    <link href="{% static 'css/print-side.css' %}" rel="stylesheet" media="screen">
+</head>
+<body>
+<div class="wrapper">
+    {% for book in object_list %}
+    <div class="box">
+        <h3>
+        </h3>
+        <span>Redemptoris Mater</span>
+        <img src="{% static 'imgs/logo.png' %}" class="logo"/>
+        <span>{{ site.name }}</span>
+        <br>
+        <em>{% for author in book.author.all %}{% if author.last_name %}{{ author.last_name }}{% else %}{{ author.name }}{% endif %}{% endfor %}</em>
+        <strong>{{ book.code }}</strong><br>
+        <span>{% if book.palco %}{{ book.palco }}{% endif %}</span>
+    </div>
+        {% if forloop.counter|divisibleby:15 %}<span class="breaker"></span>{% endif %}
+    {% endfor %}
+</div>
+</body>
+</html>
