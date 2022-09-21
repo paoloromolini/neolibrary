@@ -20,6 +20,7 @@
         <br>
         <em>{% for author in book.author.all %}{% if author.last_name %}{{ author.last_name }}{% else %}{{ author.name }}{% endif %}{% endfor %}</em><br>
         <strong>{{ book.column }}</strong><br>
+        <strong>{{ book.genre }}</strong><br>
         <span>{% if book.palco %}{{ book.palco }}{% endif %}</span>
     </div>
         {% if forloop.counter|divisibleby:15 %}<span class="breaker"></span>{% endif %}
