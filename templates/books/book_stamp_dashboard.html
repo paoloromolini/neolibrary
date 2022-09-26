@@ -1,18 +1,38 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 {% block content %}
-    <h1>Book stamps {% if book %}for {{ book }}{% elif author %}for {{ author }}{% endif %}</h1>
+<h1>Book stamps {% if book %}for {{ book }}{% elif author %}for {{ author }}{% endif %}</h1>
+<div>
+    <form>
+        <div class="form-group">
+            <label>Filter books by genres</label>
+            <select class="form-control form-control-lg" name="genre">
+                {% for genre in genres %}
+                <option value="{{ genre.code }}" {% if selected_genre == genre.code %}selected="True"{% endif %}>
+                    {{ genre.code }} - {{ genre.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div>
     <ul>
         <li class="">
-            <a class="" href="{% url 'books:books-stamps-front' %}{% if book %}?id={{ book.id }}{% elif author %}?author={{ author.id }}{% endif %}" target="_blank">
+            <a class=""
+               href="{% url 'books:books-stamps-front' %}{% if book %}?id={{ book.id }}{% elif author %}?author={{ author.id }}{% endif %}{% if selected_genre %}?genre={{ selected_genre }}{% endif %}"
+               target="_blank">
                 {% trans 'Books stamps front' %}
             </a>
         </li>
         <li class="">
-            <a class="" href="{% url 'books:books-stamps-side' %}{% if book %}?id={{ book.id }}{% elif author %}?author={{ author.id }}{% endif %}" target="_blank">
+            <a class=""
+               href="{% url 'books:books-stamps-side' %}{% if book %}?id={{ book.id }}{% elif author %}?author={{ author.id }}{% endif %}{% if selected_genre %}?genre={{ selected_genre }}{% endif %}"
+               target="_blank">
                 {% trans 'Books stamps side' %}
             </a>
         </li>
     </ul>
-
+</div>
 {% endblock content %}

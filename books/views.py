@@ -166,7 +166,10 @@ class BooksStampsDashboard(CurrentSiteMixin, TemplateView):
         context["author"] = Author.objects.filter(
             id=self.request.GET.get("author")
         ).first()
-        context["book"] = Book.objects.filter(id=self.request.GET.get("id")).first()
+        context["book"] = Book.objects.filter(
+            id=self.request.GET.get("id")).first()
+        context["genres"] = Genre.objects.all()
+        context["selected_genre"] = self.request.GET.get("genre")
         return context
 
 
@@ -177,14 +180,16 @@ class BooksStampsView(CurrentSiteMixin, ListView):
     paginate_by = None
 
     def get_queryset(self):
-        queryset = Book.objects.all().order_by("title", "author")
+        queryset = Book.objects.all().order_by("genre", "author", "title")
         id_filter = self.request.GET.get("id")
         author_id_filter = self.request.GET.get("author")
+        genre_code_filter = self.request.GET.get("genre")
         if id_filter:
             queryset = queryset.filter(id=id_filter)
         if author_id_filter:
-            print(author_id_filter)
             queryset = queryset.filter(author__id__in=[author_id_filter])
+        if genre_code_filter:
+            queryset = queryset.filter(genre__code=genre_code_filter)
         return queryset
 
 
