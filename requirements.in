@@ -8,3 +8,4 @@ pytz==2018.4
 black
 python-dotenv
 django-isbn-field
+django-adminrestrict==3.1
