@@ -1,4 +1,4 @@
-Django==4.1
+Django==4.1.6
 django-simple-search==1.0.2
 flake8==3.5.0
 mccabe==0.6.1
